@@ -15,7 +15,7 @@ function viewLessons(){
   var h='<h1>Lessons</h1><p class="sub">'+D.lessons.length+' lessons with Iryna: summary, key vocabulary and discussion questions.</p>';
   h+='<div class="note">Lesson numbers follow the order the files were downloaded. If any are in the wrong order, they can be renumbered.</div>';
   D.lessons.forEach(function(l){
-    h+='<a class="card" href="#/lesson/'+l.n+'"><div class="lrow"><span class="num">'+l.n+'</span><div><div class="ltitle">'+esc(l.title_en)+'</div><div class="lua">'+esc(l.title_ua)+'</div></div></div><div class="chips">'+l.topics.slice(0,3).map(function(t){return '<span class="chip">'+esc(t.length>46?t.slice(0,44)+'…':t)+'</span>'}).join('')+'</div><div class="meta">'+l.key.length+' key words &middot; '+l.words.length+' more words</div></a>';
+    h+='<a class="card" href="#/lesson/'+l.n+'"><div class="lrow"><span class="num">'+l.n+'</span><div><div class="ltitle">'+esc(l.title_en)+'</div><div class="lua">'+esc(l.title_ua)+'</div></div></div><div class="chips">'+l.topics.slice(0,3).map(function(t){return '<span class="chip">'+esc(t.length>46?t.slice(0,44)+'…':t)+'</span>'}).join('')+'</div><div class="meta">'+l.key.length+' key words &middot; '+(l.words.length+(l.phrases?l.phrases.length:0))+' more words and phrases</div></a>';
   });
   return h;
 }
@@ -26,6 +26,7 @@ function viewLesson(n){
   h+='<h2>Короткий зміст · Summary</h2><div class="card"><p class="sum-ua" lang="uk">'+esc(l.summary_ua)+sayBtn(l.summary_ua)+'</p><p class="sum-en">'+esc(l.summary)+'</p></div>';
   h+='<h2>Key vocabulary</h2><div class="card">'+l.key.map(function(k){return '<div class="v"><div class="ua">'+esc(k.ua)+sayBtn(k.ua)+'</div><div class="en">'+esc(k.en)+'</div>'+(k.ex?'<div class="ex">'+esc(k.ex)+sayBtn(k.ex)+'</div>':'')+'</div>'}).join('')+'</div>';
   h+='<h2>More words and phrases</h2><div class="card">'+l.words.map(function(k){return '<div class="v"><div class="ua">'+esc(k.ua)+sayBtn(k.ua)+'</div><div class="en">'+esc(k.en)+'</div></div>'}).join('')+'</div>';
+  if(l.phrases&&l.phrases.length)h+='<h2>Your phrases from the lesson</h2><div class="card">'+l.phrases.map(function(k){return '<div class="v"><div class="ua">'+esc(k.ua)+sayBtn(k.ua)+'</div><div class="en">'+esc(k.en)+'</div></div>'}).join('')+'</div>';
   if(l.questions.length)h+='<h2>Discussion questions</h2><div class="card"><ul class="q">'+l.questions.map(function(q){return '<li>'+esc(q)+'</li>'}).join('')+'</ul></div>';
   h+='<div class="btns"><a class="btn ghost" style="text-align:center;text-decoration:none" href="#/dictionary?lesson='+l.n+'">Words in dictionary</a><a class="btn" style="text-align:center;text-decoration:none" href="#/practice?lesson='+l.n+'">Practise this lesson</a></div>';
   h+='<div class="pn"><a class="'+(n<=1?'off':'')+'" href="#/lesson/'+(n-1)+'">&larr; Lesson '+(n-1)+'</a><a class="'+(n>=D.lessons.length?'off':'')+'" href="#/lesson/'+(n+1)+'">Lesson '+(n+1)+' &rarr;</a></div>';
