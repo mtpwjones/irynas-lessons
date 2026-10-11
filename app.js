@@ -105,5 +105,5 @@ var deferred=null,ib=document.getElementById('installBtn');
 window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;ib.hidden=false});
 ib.addEventListener('click',function(){if(!deferred)return;deferred.prompt();deferred.userChoice.then(function(){deferred=null;ib.hidden=true})});
 window.addEventListener('appinstalled',function(){ib.hidden=true});
-if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1')){navigator.serviceWorker.register('sw.js').catch(function(){})}
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1')){navigator.serviceWorker.register('sw.js').catch(function(){});var had=!!navigator.serviceWorker.controller;navigator.serviceWorker.addEventListener('controllerchange',function(){if(had&&!window.__rl){window.__rl=1;location.reload()}})}
 })();
