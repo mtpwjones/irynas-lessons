@@ -53,3 +53,5 @@ ul.q{padding-left:1.1rem;margin:.3rem 0}ul.q li{margin:.35rem 0}
 .note{background:#fff8e1;border:1px solid #f3d27a;color:#6b4d00;border-radius:12px;padding:10px 12px;font-size:.88rem;margin:10px 0}
 @media (prefers-color-scheme:dark){.note{background:#3a2f10;border-color:#6b5316;color:#f5d98a}.entry .tag{background:#4a3a0c;color:#f5d98a}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.sum-ua{font-size:1.04rem;margin:0 0 12px;line-height:1.55}.sum-en{margin:0;padding-top:12px;border-top:1px dashed var(--line);color:var(--muted);font-size:.95rem}

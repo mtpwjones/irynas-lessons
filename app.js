@@ -23,7 +23,7 @@ function viewLesson(n){
   var l=D.lessons.filter(function(x){return x.n===n})[0];if(!l)return '<p>Lesson not found. <a href="#/lessons">Back</a></p>';
   var h='<a class="back" href="#/lessons">&larr; All lessons</a><div class="lrow"><span class="num">'+l.n+'</span><div><h1 style="margin-top:0">'+esc(l.title_en)+'</h1><div class="lua">'+esc(l.title_ua)+'</div></div></div>';
   h+='<div class="chips" style="margin-bottom:6px">'+l.topics.map(function(t){return '<span class="chip">'+esc(t)+'</span>'}).join('')+'</div>';
-  h+='<h2>Summary</h2><div class="card">'+esc(l.summary)+'</div>';
+  h+='<h2>Короткий зміст · Summary</h2><div class="card"><p class="sum-ua" lang="uk">'+esc(l.summary_ua)+sayBtn(l.summary_ua)+'</p><p class="sum-en">'+esc(l.summary)+'</p></div>';
   h+='<h2>Key vocabulary</h2><div class="card">'+l.key.map(function(k){return '<div class="v"><div class="ua">'+esc(k.ua)+sayBtn(k.ua)+'</div><div class="en">'+esc(k.en)+'</div>'+(k.ex?'<div class="ex">'+esc(k.ex)+sayBtn(k.ex)+'</div>':'')+'</div>'}).join('')+'</div>';
   h+='<h2>More words and phrases</h2><div class="card">'+l.words.map(function(k){return '<div class="v"><div class="ua">'+esc(k.ua)+sayBtn(k.ua)+'</div><div class="en">'+esc(k.en)+'</div></div>'}).join('')+'</div>';
   if(l.questions.length)h+='<h2>Discussion questions</h2><div class="card"><ul class="q">'+l.questions.map(function(q){return '<li>'+esc(q)+'</li>'}).join('')+'</ul></div>';
