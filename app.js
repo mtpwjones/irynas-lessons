@@ -24,7 +24,15 @@ function viewLesson(n){
   var h='<a class="back" href="#/lessons">&larr; All lessons</a><div class="lrow"><span class="num">'+l.n+'</span><div><h1 style="margin-top:0">'+esc(l.title_en)+'</h1><div class="lua">'+esc(l.title_ua)+'</div></div></div>';
   h+='<div class="chips" style="margin-bottom:6px">'+l.topics.map(function(t){return '<span class="chip">'+esc(t)+'</span>'}).join('')+'</div>';
   h+='<h2>Короткий зміст · Summary</h2><div class="card"><p class="sum-ua" lang="uk">'+esc(l.summary_ua)+sayBtn(l.summary_ua)+'</p><p class="sum-en">'+esc(l.summary)+'</p></div>';
-  h+='<h2>Key vocabulary</h2><div class="card">'+l.key.map(function(k){return '<div class="v"><div class="ua">'+esc(k.ua)+sayBtn(k.ua)+'</div><div class="en">'+esc(k.en)+'</div>'+(k.ex?'<div class="ex">'+esc(k.ex)+sayBtn(k.ex)+'</div>':'')+'</div>'}).join('')+'</div>';
+  var fb=(window.FULL&&window.FULL[l.n])||[];
+  if(fb.length){h+='<h2>Lesson content (from the document)</h2><div class="card doc">'+fb.map(function(b){
+    if(b[0]==='i')return '<img class="pic" loading="lazy" src="'+esc(b[1])+'" alt="Picture from the lesson">';
+    if(b[0]==='n')return '<ul class="notes" lang="uk">'+b[1].map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>';
+    if(b[0]==='q')return '<p class="dq" lang="uk">'+esc(b[1])+'</p>';
+    if(b[0]==='r')return '<p class="rd" lang="uk">'+esc(b[1])+sayBtn(b[1])+'</p>';
+    if(b[0]==='v')return '<p class="dv" lang="uk">'+esc(b[1])+sayBtn(b[1])+'</p>';
+    return '<p class="dp" lang="uk">'+esc(b[1])+'</p>'}).join('')+'</div>'}
+  h+='<h2>Key vocabulary (organised)</h2><div class="card">'+l.key.map(function(k){return '<div class="v"><div class="ua">'+esc(k.ua)+sayBtn(k.ua)+'</div><div class="en">'+esc(k.en)+'</div>'+(k.ex?'<div class="ex">'+esc(k.ex)+sayBtn(k.ex)+'</div>':'')+'</div>'}).join('')+'</div>';
   h+='<h2>More words and phrases</h2><div class="card">'+l.words.map(function(k){return '<div class="v"><div class="ua">'+esc(k.ua)+sayBtn(k.ua)+'</div><div class="en">'+esc(k.en)+'</div></div>'}).join('')+'</div>';
   if(l.phrases&&l.phrases.length)h+='<h2>Your phrases from the lesson</h2><div class="card">'+l.phrases.map(function(k){return '<div class="v"><div class="ua">'+esc(k.ua)+sayBtn(k.ua)+'</div><div class="en">'+esc(k.en)+'</div></div>'}).join('')+'</div>';
   if(l.questions.length)h+='<h2>Discussion questions</h2><div class="card"><ul class="q">'+l.questions.map(function(q){return '<li>'+esc(q)+'</li>'}).join('')+'</ul></div>';
